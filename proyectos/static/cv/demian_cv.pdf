@@ -1,0 +1,15 @@
+============================================================
+[DEMIAN CV - MARCADOR DE POSICIÓN]
+============================================================
+
+Este archivo es un marcador de posición temporal para tu Currículum Vitae.
+
+Para subir tu CV real:
+1. Exporta tu currículum a formato PDF desde Word, Canva u otra herramienta.
+2. Renombra tu archivo PDF exactamente a:
+   demian_cv.pdf
+3. Copia y reemplaza este archivo en la siguiente ubicación de tu proyecto:
+   proyectos/static/cv/demian_cv.pdf
+
+¡El botón "Ver CV Online" y "Descargar PDF" de tu portfolio web funcionarán inmediatamente con tu archivo real!
+============================================================

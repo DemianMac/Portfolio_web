@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Demián | Portfolio{% endblock %}</title>
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS v4 CDN -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    
+    <style type="text/theme">
+        @theme {
+            --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --color-brand-blue: #3b82f6; /* blue-500 (azul de confianza) */
+            --color-brand-cyan: #22d3ee; /* cyan-400 */
+            --color-brand-indigo: #818cf8; /* indigo-400 */
+        }
+    </style>
+    <style>
+        .text-gradient {
+            background-image: linear-gradient(to right, #3b82f6, #22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="bg-zinc-950 text-zinc-100 font-sans min-h-screen flex flex-col selection:bg-brand-blue selection:text-white">
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-zinc-950/70 border-b border-zinc-900">
+        <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#" class="text-xl font-bold tracking-tight text-gradient hover:opacity-85 transition-opacity">
+                Demián.dev
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
+                <a href="#inicio" class="hover:text-zinc-100 transition-colors">Inicio</a>
+                <a href="#proyectos" class="hover:text-zinc-100 transition-colors">Proyectos</a>
+                <a href="#sobre-mi" class="hover:text-zinc-100 transition-colors">Sobre Mí</a>
+                <a href="#curriculum" class="hover:text-zinc-100 transition-colors">CV</a>
+                <a href="#contacto" class="hover:text-zinc-100 transition-colors">Contacto</a>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="hidden md:flex">
+                <a href="#contacto" class="px-4 py-2 rounded-full text-xs font-semibold bg-gradient-to-r from-brand-blue to-brand-cyan text-white shadow-lg shadow-brand-blue/20 hover:scale-105 transition-all">
+                    Contáctame
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden text-zinc-400 hover:text-zinc-100 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-b border-zinc-900 bg-zinc-950 px-6 py-4 flex flex-col gap-4 text-zinc-400 font-medium">
+            <a href="#inicio" class="hover:text-zinc-100 transition-colors">Inicio</a>
+            <a href="#proyectos" class="hover:text-zinc-100 transition-colors">Proyectos</a>
+            <a href="#sobre-mi" class="hover:text-zinc-100 transition-colors">Sobre Mí</a>
+            <a href="#curriculum" class="hover:text-zinc-100 transition-colors">CV</a>
+            <a href="#contacto" class="hover:text-zinc-100 transition-colors">Contacto</a>
+            <a href="#contacto" class="w-full text-center px-4 py-2 rounded-full text-xs font-semibold bg-gradient-to-r from-brand-blue to-brand-cyan text-white shadow-lg">
+                Contáctame
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-900 bg-zinc-950/80 py-8 mt-20">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <span class="text-sm text-zinc-500">
+                &copy; 2026 Demián. Todos los derechos reservados.
+            </span>
+            <div class="flex items-center gap-6 text-sm text-zinc-400">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-100 transition-colors">GitHub</a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-100 transition-colors">LinkedIn</a>
+                <a href="#contacto" class="hover:text-zinc-100 transition-colors">Contacto</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                menuIcon.setAttribute('d', 'M4 6h16M4 12h16m-7 6h7');
+            } else {
+                menuIcon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+            }
+        });
+
+        // Close mobile menu on click link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.setAttribute('d', 'M4 6h16M4 12h16m-7 6h7');
+            });
+        });
+    </script>
+</body>
+</html>
